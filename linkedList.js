@@ -6,6 +6,7 @@
 function linkedListGenerator(){
   var head = null;
   var tail = null;
+  var count = 0;
 
   function getHead() {
     return head;
@@ -27,9 +28,11 @@ function linkedListGenerator(){
     }else if(head.next === null){
       tail = newNode;
       head.next = tail;
+      count++
     }else{
       tail.next = newNode;
       tail = newNode;
+      count++;
     }
     return newNode;
   };
@@ -44,14 +47,15 @@ function linkedListGenerator(){
     }else if(number === 0){
     //assign the head to old head
       head = currentNode.next;
+      count--;
     }if(currentNode.next === null){
       tail = previousNode;
+      count--;
     }
     previousNode.next = currentNode.next
   };
 
   function get(number) {
-    var count = 0;
     var nowNode = head;
 
     if(nowNode === null){
@@ -70,9 +74,27 @@ function linkedListGenerator(){
   };
 
   function insert(value, number) {
+    var parentNode = get(number - 1)
+    var newNode = {
+      value: value,
+      next: parentNode.next
+    }
 
-
+    if(number === 0){
+      newNode.next = parentNode;
+      head = newNode;
+      count++;
+    } else if (number > getLength() || number < 0){
+      return false;
+    } else {
+      parentNode.next = newNode;
+      count++;
+    }
   };
+
+  function getLength(){
+    return count;
+  }
 
   return {
     getHead: getHead,
@@ -81,10 +103,16 @@ function linkedListGenerator(){
     remove: remove,
     get: get,
     insert: insert,
+    getLength: getLength
   };
 }
 
+
 var myll = linkedListGenerator();
 myll.add("seolhee");
-
+console.log(myll.getLength());
+myll.add("jeff");
+console.log(myll.getLength());
+myll.add("josh");
+console.log(myll.getLength());
 console.log(myll.getHead());
