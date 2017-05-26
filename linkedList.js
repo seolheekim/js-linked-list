@@ -6,16 +6,13 @@
 function linkedListGenerator(){
   var head = null;
   var tail = null;
-  var length = 0;
 
   function getHead() {
     return head;
-
   };
 
   function getTail() {
     return tail;
-
   };
 
   function add(value) {
@@ -38,11 +35,19 @@ function linkedListGenerator(){
   };
 
   function remove(number) {
+    var currentNode = get(number);
+    var previousNode = get(number - 1);
 
-
-
-
-
+    if(currentNode === false){
+      return false;
+    //remove the head
+    }else if(number === 0){
+    //assign the head to old head
+      head = currentNode.next;
+    }if(currentNode.next === null){
+      tail = previousNode;
+    }
+    previousNode.next = currentNode.next
   };
 
   function get(number) {
@@ -62,10 +67,10 @@ function linkedListGenerator(){
       }
     }
     return nowNode;
-
   };
 
   function insert(value, number) {
+
 
   };
 
